@@ -16,23 +16,29 @@ In the right panel, set the Facebook App field to the App you created.  For User
 Click on Generate Access Token, this will give you your "short-lived-access-token", it's valid for 1 hour.
 You need to use this access token to generate a long-lived-access-token.  To generate this token, open up a command shell and run:
 
-```curl -i -X GET "https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&
+```
+curl -i -X GET "https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&
   client_id=APP-ID&
   client_secret=APP-SECRET&
-  fb_exchange_token=SHORT-LIVED-USER-ACCESS-TOKEN"```
+  fb_exchange_token=SHORT-LIVED-USER-ACCESS-TOKEN"
+```
   
 Replacing the APP-ID, APP-SECRET, and S-L-A-T with the values you collected in previous steps.
 The resonse will contain your long-lived-access-token, save this value.
 Now get your Page Access token.  To do this you'll need your Page ID.  You can get that from a few different places, but since you're already in the shell, you can run:
 
-```curl -i -X GET "https://graph.facebook.com/{user-id}/accounts
-     ?access_token={user-access-token}"```
+```
+curl -i -X GET "https://graph.facebook.com/{user-id}/accounts
+     ?access_token={user-access-token}"
+```
      
 replacing the user-id and user-access-tokens you collected from earlier.  The response will have the page's "id" in it.  To get the page access token:
 
-```curl -i -X GET "https://graph.facebook.com/PAGE-ID?
+```
+curl -i -X GET "https://graph.facebook.com/PAGE-ID?
   fields=access_token&
-  access_token=USER-ACCESS-TOKEN"```
+  access_token=USER-ACCESS-TOKEN"
+```
   
 Replacing the USER-ACCESS-TOKEN with the long lived token you got earlier.  You can use the short lived, but it'll only generate a page access token that lives for an hour.  A page access token that is created with the long lived has no expiration date.  The response to this will have the page access token in it.  This page access token will go into your code.
 Facebook access token documentation is here https://developers.facebook.com/docs/pages/getting-started
