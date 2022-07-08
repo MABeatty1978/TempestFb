@@ -12,7 +12,17 @@ Once the app is created go into the basic settings on the left panel and note yo
 ## Get your Facebook access tokens.
 This is the part I struggled witht the most to figure out.  If you plan on diving into Facebook app development more, I would strongly encourage to to spend some time and learn about how this part of the process works.  If you don't care and just want to make it work:
 From the Facebook Developer Tools page https://developers.facebook.com/tools/ graph API explorer.  This explorer allows you to test http messages and see how data flows.  The page should load with me?fields=id,name in the explorer bar.  No need to do anything here, just click Submit".  You'll get a json response with your user id, copy this and save it, you'll need it later.
-In the right panel, set the Facebook App field to the App you created.  For User or Page, you want User Token.  For permissions select pages_show_list, pages_read_engagement, pages_manage_metadata, pages_read_user_content, pages_manage_posts, pages_manage_engagement.
+In the right panel, set the Facebook App field to the App you created.  For User or Page, you want User Token.  For permissions select
+
+```
+pages_show_list
+pages_read_engagement
+pages_manage_metadata
+pages_read_user_content
+pages_manage_posts
+pages_manage_engagement
+```
+
 Click on Generate Access Token, this will give you your "short-lived-access-token", it's valid for 1 hour.
 You need to use this access token to generate a long-lived-access-token.  To generate this token, open up a command shell and run:
 
