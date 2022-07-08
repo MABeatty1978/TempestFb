@@ -37,7 +37,8 @@ Tempest API documentation is here https://weatherflow.github.io/Tempest/api/
 Few different ways to get your Station ID, since you're already logged into the Tempest website, just click on the icon of the Tempest sensor in the top right, scroll down to the bottom and on the right there should be a little green dot next to Online.  Click the Online.
 
 ## Configure the python app
-In the forecastToFb.py program set the values for myStationID and myPageToken appropriately.  
+In the forecastToFb.py program set the values for pageID, pageAccessToken, stationID, and tempestToken.  
 
 
-
+## Run the program
+Make sure the program's permissions are executable and then run it from your command line.  I have this setup in crontab on my RaspberryPi scheduled to run every morning at 5am.
