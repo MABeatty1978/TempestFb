@@ -4,12 +4,16 @@ import requests
 import datetime
 import json
 import time
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 #Variable declarations
-pageId = 
-pageAccessToken = ""
-stationID = 
-tempestToken = ""
+pageId = os.getenv('FB_PAGE_ID') 
+pageAccessToken = os.getenv('FB_PAGE_ACCESS_TOKEN')
+stationID = os.getenv('WF_STATION_ID')
+tempestToken = os.getenv('WF_TOKEN')
 tempestURL = "https://swd.weatherflow.com/swd/rest/better_forecast?station_id={}&units_temp=f&units_wind=mph&units_pressure=inhg&units_precip=in&units_distance=mi&token={}".format(stationID, tempestToken)
 fbURL = "https://graph.facebook.com/{}/feed?message={}&access_token={}"
 
@@ -25,6 +29,9 @@ lowTemp = data['forecast']['daily'][0]['air_temp_low']
 precipProb = data['forecast']['daily'][0]['precip_probability']
 if precipProb !=0:
     precipType = data['forecast']['daily'][0]['precip_type']
+
+highTemp = str(int(highTemp)) + u'\N{DEGREE SIGN}'
+lowTemp = str(int(lowTemp)) + u'\N{DEGREE SIGN}'
 
 #Format the sunrise/sunset epochs to be human friendly
 sunset = datetime.datetime.fromtimestamp(sunset)
@@ -44,5 +51,4 @@ msg = msg + "Sunrise is at {}, sunset will be at {}".format(sunrise, sunset)
 #If successful, the response will be formated with an 'id' for the post.  Otherwise, there will be an error message
 response = requests.post(fbURL.format(pageId, msg, pageAccessToken))
 d = response.json()
-print("Response: %s" % d)
 

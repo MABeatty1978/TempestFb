@@ -51,6 +51,14 @@ Few different ways to get your Station ID, since you're already logged into the 
 ## Configure the python app
 In the forecastToFb.py program set the values for pageID, pageAccessToken, stationID, and tempestToken.  
 
+## Create a the environment
+create a file in the the same directory as the program named .env.  In that file, you will need to add the values for:
+```
+FB_PAGE_ID=
+FB_PAGE_ACCESS_TOKEN=
+WF_TOKEN=
+WF_STATION_ID=
+```
 
 ## Run the program
 Make sure the program's permissions are executable and then run it from your command line.  I have this setup in crontab on my RaspberryPi scheduled to run every morning at 5am.
