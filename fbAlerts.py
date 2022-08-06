@@ -16,7 +16,10 @@ aFile = "activeAlerts.dat"
 pageId = os.getenv('FB_PAGE_ID') 
 pageAccessToken = os.getenv('FB_PAGE_ACCESS_TOKEN')
 fbURL = "https://graph.facebook.com/{}/feed?message={}&access_token={}"
-
+header = {
+        'User-Agent': 'LorainCountyWeatherBot',
+        'From': 'mabeatty1978@gmail.com'
+    }
 #Read the current active alerts, if none, instatiate Alerts
 if os.path.isfile(aFile):
     with open(aFile,"r") as temp_file:
@@ -25,7 +28,7 @@ else:
     Alerts = []
 
 #Get the json from NWS
-r = requests.get(URL)
+r = requests.get(URL, headers=header)
 r_data = r.json()
 
 if not r_data['features']:
@@ -43,13 +46,11 @@ for i, alert in enumerate(r_data['features']):
     #If the current alert is not in the existing list, don't send it
     #We only want to send new alerts
     if not alertId in Alerts:
-        msg = "TESTING TESTING TESTING - IGNORE THIS WARNING\n\n\n"
-        msg = msg + headline + "\n\n" + description + "\n\n" + instruction
+        msg = headline + "\n\n" + description + "\n\n" + instruction
         a = open(aFile,"a")
         a.write(alertId + "\n")
         a.close()
         response = requests.post(fbURL.format(pageId, msg, pageAccessToken))
         d = response.json()
-        print(msg)
     i += 1
 
